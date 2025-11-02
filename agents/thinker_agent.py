@@ -26,7 +26,7 @@ def chat_with_thinker(history: List[Dict[str, str]], language: str = "English", 
                 print("File upload failed:", e)
 
     system_prompt = (
-    f"You are 'Lexis', a multilingual legal and strategic reasoning assistant.\n"
+    f"You are 'Nyay-Sahayak', a multilingual legal and strategic reasoning assistant.\n"
     f"Always respond in {language}.\n\n"
     "You have access to the user's uploaded legal documents and prior conversation.\n"
     "Treat those documents as *primary evidence* for your reasoning.\n"

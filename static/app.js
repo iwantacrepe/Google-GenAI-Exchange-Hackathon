@@ -70,7 +70,7 @@ function appendThinking() {
       <div class="thinking-bubble"></div>
       <div class="thinking-bubble"></div>
     </div>
-    <p class="thinking-label">Lexis is reasoning...</p>
+    <p class="thinking-label">Nyay-Sahayak is reasoning...</p>
   `;
   chatBox.appendChild(wrap);
   chatBox.scrollTop = chatBox.scrollHeight;
