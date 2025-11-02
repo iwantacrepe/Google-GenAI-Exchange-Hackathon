@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Legal Document Demystifier</title>
+  <script>
+  const userLanguage = "{{ language }}";
+  const translations = {
+    "English": {
+      "agents": "🧩 Agents",
+      "summarizer": "🧠 Summarizer",
+      "jargons": "📘 Legal Terms & Jargons",
+      "timeline": "🕒 Case Timeline",
+      "graph": "📊 Case Relationship Graph",
+      "thinker": "💭 Thinker (Chat Agent)"
+    },
+    "Hindi": {
+      "agents": "🧩 एजेंट्स",
+      "summarizer": "🧠 सारांश",
+      "jargons": "📘 कानूनी शब्दावली",
+      "timeline": "🕒 मुकदमे की समयरेखा",
+      "graph": "📊 मामला संबंध ग्राफ",
+      "thinker": "💭 विचारक (चैट सहायक)"
+    },
+    "Bengali": {
+      "agents": "🧩 এজেন্টস",
+      "summarizer": "🧠 সারসংক্ষেপ",
+      "jargons": "📘 আইনি শব্দভান্ডার",
+      "timeline": "🕒 মামলার টাইমলাইন",
+      "graph": "📊 মামলার সম্পর্ক গ্রাফ",
+      "thinker": "💭 চিন্তাশীল (চ্যাট সহকারী)"
+    },
+    "Marathi": {
+      "agents": "🧩 एजंट्स",
+      "summarizer": "🧠 सारांश",
+      "jargons": "📘 कायदेशीर शब्दावली",
+      "timeline": "🕒 खटल्याची वेळरेखा",
+      "graph": "📊 प्रकरण संबंध ग्राफ",
+      "thinker": "💭 विचारक (चॅट सहाय्यक)"
+    },
+    "Kannada": {
+      "agents": "🧩 ಏಜೆಂಟ್ಗಳು",
+      "summarizer": "🧠 ಸಾರಾಂಶ",
+      "jargons": "📘 ಕಾನೂನು ಪದಗಳು",
+      "timeline": "🕒 ಪ್ರಕರಣದ ವೇಳಾಪಟ್ಟಿ",
+      "graph": "📊 ಪ್ರಕರಣದ ಸಂಬಂಧ ಗ್ರಾಫ್",
+      "thinker": "💭 ಚಿಂತಕ (ಚಾಟ್ ಸಹಾಯಕ)"
+    },
+    "Telugu": {
+      "agents": "🧩 ఏజెంట్లు",
+      "summarizer": "🧠 సారాంశం",
+      "jargons": "📘 న్యాయ పదాలు",
+      "timeline": "🕒 కేసు టైమ్‌లైన్",
+      "graph": "📊 కేసు సంబంధ గ్రాఫ్",
+      "thinker": "💭 ఆలోచనకర్త (చాట్ సహాయకుడు)"
+    },
+    "Tamil": {
+      "agents": "🧩 முகவர்கள்",
+      "summarizer": "🧠 சுருக்கம்",
+      "jargons": "📘 சட்டச் சொற்கள்",
+      "timeline": "🕒 வழக்கின் காலவரிசை",
+      "graph": "📊 வழக்கு உறவு வரைபடம்",
+      "thinker": "💭 சிந்திப்பவர் (அரட்டை உதவியாளர்)"
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const t = translations[userLanguage] || translations["English"];
+    document.querySelector(".sidebar h2").innerText = t.agents;
+    document.querySelector('li[data-panel="summary"]').innerText = t.summarizer;
+    document.querySelector('li[data-panel="jargons"]').innerText = t.jargons;
+    document.querySelector('li[data-panel="timeline"]').innerText = t.timeline;
+    document.querySelector('li[data-panel="graph"]').innerText = t.graph;
+    document.querySelector('li[data-panel="thinker"]').innerText = t.thinker;
+
+    // Change panel headings too
+    document.querySelector("#summary h2").innerText = t.summarizer;
+    document.querySelector("#jargons h2").innerText = t.jargons;
+    document.querySelector("#timeline h2").innerText = t.timeline;
+    document.querySelector("#graph h2").innerText = t.graph;
+    document.querySelector("#thinker h2").innerText = t.thinker;
+  });
+</script>
+
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+  <!-- Markdown & Sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+</head>
+
+<body>
+  <!-- 🧭 Sidebar -->
+  <div class="sidebar">
+    <h2>🧩 Agents</h2>
+    <ul>
+      <li data-panel="summary" class="active">🧠 Summarizer</li>
+      <li data-panel="jargons">📘 Jargons & Terms</li>
+      <li data-panel="timeline">🕒 Timeline</li>
+      <li data-panel="graph">📊 Graph</li>
+      <li data-panel="thinker">💭 Thinker</li>
+    </ul>
+  </div>
+
+  <!-- 🧱 Main Content Area -->
+  <div class="content">
+
+    <!-- 🧠 SUMMARIZER PANEL -->
+    <div id="summary" class="panel active">
+      <h2>🧠 Summarizer</h2>
+      <div id="summary-content"
+           class="markdown-box"
+           data-md='{{ summary|tojson|safe }}'></div>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const summaryEl = document.getElementById("summary-content");
+          const md = {{ summary|tojson }};
+          summaryEl.innerHTML = marked.parse(md || "Upload a file to begin analysis.");
+        });
+      </script>
+    </div>
+
+    <!-- 📘 JARGONS PANEL -->
+    <div id="jargons" class="panel">
+  <h2>📘 Legal Terms and Jargons</h2>
+  <div id="jargon-output" class="markdown-box">⚙️ Extracting...</div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const jargonBox = document.getElementById("jargon-output");
+      try {
+        const res = await fetch("/api/jargons", { method: "POST" });
+        const data = await res.json();
+        jargonBox.innerHTML = DOMPurify.sanitize(marked.parse(data.output || "⚠️ No terms found."));
+      } catch {
+        jargonBox.innerHTML = "⚠️ Failed to load jargons.";
+      }
+    });
+    </script>
+
+    
+
+    <!-- 🕒 TIMELINE PANEL -->
+    <div id="timeline" class="panel">
+      <h2>🕒 Case Timeline</h2>
+      <div id="timelineContainer" style="margin-top:20px;"></div>
+
+      <!-- Vis.js Timeline -->
+      <link href="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.0/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.0/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    </div>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("timelineContainer");
+  if (!container) return;
+
+  container.innerHTML = "<p style='color:#aaa;'>📄 Extracting timeline...</p>";
+
+  try {
+    const res = await fetch("/api/timeline", { method: "POST" });
+    const data = await res.json();
+    let timelineData = [];
+
+    try {
+      timelineData = JSON.parse(data.output);
+    } catch {
+      console.warn("Timeline parse error:", data.output);
+      container.innerHTML = "<p>⚠️ Invalid timeline data.</p>";
+      return;
+    }
+
+    if (!Array.isArray(timelineData) || timelineData.length === 0) {
+      container.innerHTML = "<p>⚠️ No timeline events found.</p>";
+      return;
+    }
+
+   // ✅ FIXED TIMELINE CODE
+const items = new vis.DataSet(
+  timelineData.map((e, i) => {
+    const isStage = e.date && e.date.toLowerCase().includes("stage");
+    
+    // Create a sequential placeholder date if it's a stage (e.g., Jan 1 2000 → Jan 2 2000 → …)
+    const startDate = isStage
+      ? new Date(2000, 0, parseInt(e.date.replace(/\D/g, ""), 10) || i + 1)
+      : new Date(e.date); // fallback to actual date if valid
+
+    return {
+      id: i + 1,
+      content: `<b>${e.title}</b><br>${e.description}`,
+      start: startDate
+    };
+  })
+);
+
+
+
+    const options = {
+  orientation: "top",
+  zoomable: true,
+  moveable: true,
+  width: "100%",
+  height: "500px",
+  margin: { item: 15 },
+  selectable: false,
+  tooltip: { followMouse: true },
+  timeAxis: { scale: "day", step: 1 },
+  showCurrentTime: false
+};
+
+
+    new vis.Timeline(container, items, options);
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<p>⚠️ Failed to generate timeline.</p>";
+  }
+});
+</script>
+
+    <div id="graph" class="panel">
+    <h2>📊 Case Relationship Graph</h2>
+    <div id="graphContainer" style="width:100%; height:600px; margin-top:20px;"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </div>
+
+
+
+    <!-- 💭 THINKER CHAT PANEL -->
+    <div id="thinker" class="panel">
+      <h2>💭 Thinker (Chat Agent)</h2>
+      <div id="chat-box" class="chat-box"></div>
+      <div class="chat-input">
+        <textarea id="user-input" placeholder="Ask anything about your case or position..."></textarea>
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+
+  </div> <!-- ✅ CLOSES .content -->
+
+  <!-- JS Logic -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

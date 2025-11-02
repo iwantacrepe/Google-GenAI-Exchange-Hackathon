@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | Legal Demystifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* 🩶 Base Layout */
+    body {
+      background: radial-gradient(circle at 30% 20%, #101728, #05080f);
+      font-family: "Inter", sans-serif;
+      color: #dfe6f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 🪩 Welcome Container */
+    .welcome-container {
+      width: 420px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px 35px;
+      backdrop-filter: blur(20px);
+      text-align: center;
+      box-shadow: 0 0 40px rgba(66, 150, 255, 0.2);
+      animation: fadeUp 0.8s ease-out;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #40c9ff, #e81cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #c4cee8;
+      margin-bottom: 30px;
+    }
+
+    select, input[type=file] {
+      margin: 12px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      width: 90%;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    select:focus, input[type=file]:focus {
+      border-color: #40c9ff;
+      box-shadow: 0 0 8px #40c9ff50;
+    }
+
+    button {
+      margin-top: 20px;
+      background: linear-gradient(90deg, #40c9ff, #e81cff);
+      color: white;
+      border: none;
+      padding: 12px 45px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #40c9ff88;
+    }
+
+    /* ==============================
+       ⚙️ Fullscreen Loader Overlay
+    ============================== */
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 15, 0.9);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    #loadingOverlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .neon-loader {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .neon-loader .ring {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 3px solid transparent;
+      border-top: 3px solid #40c9ff;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+      box-shadow: 0 0 30px #40c9ff88;
+    }
+
+    .neon-loader .ring:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      border-top-color: #e81cff;
+      animation-delay: 0.4s;
+      box-shadow: 0 0 30px #e81cff88;
+    }
+
+    .neon-loader .ring:nth-child(3) {
+      width: 180px;
+      height: 180px;
+      border-top-color: #ffcf40;
+      animation-delay: 0.8s;
+      box-shadow: 0 0 30px #ffcf4088;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .neon-loader p {
+      position: absolute;
+      top: 210px;
+      font-size: 1.1rem;
+      color: #dfe6f2;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px #40c9ff;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <h1>⚖️ Legal Document Demystifier</h1>
+    <p>Upload your case files and choose your preferred language for the assistant.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="case_files" multiple required accept=".pdf,.jpg,.jpeg,.png,.docx"><br>
+
+      <select name="language" required>
+        <option value="English">English</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Bengali">Bengali</option>
+        <option value="Marathi">Marathi</option>
+        <option value="Kannada">Kannada</option>
+        <option value="Telugu">Telugu</option>
+        <option value="Tamil">Tamil</option>
+      </select><br>
+
+      <button type="submit">Launch Workspace ➜</button>
+    </form>
+  </div>
+
+  <!-- ⚡ Loading Overlay -->
+  <div id="loadingOverlay">
+    <div class="neon-loader">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <p>Agents analyzing your case...</p>
+    </div>
+  </div>
+
+  <!-- ✨ JS Logic -->
+  <script>
+    const form = document.querySelector("form");
+    const overlay = document.getElementById("loadingOverlay");
+
+    form.addEventListener("submit", (e) => {
+      overlay.classList.add("active");
+    });
+  </script>
+</body>
+</html>

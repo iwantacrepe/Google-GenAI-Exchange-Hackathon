@@ -1,0 +1,316 @@
+/* ===========================
+   GLOBAL APP STYLE
+=========================== */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(circle at 25% 25%, #0b111f, #000510);
+  color: #e0e6f5;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+.sidebar {
+  width: 230px;
+  background: rgba(255, 255, 255, 0.04);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  color: #a8b2d1;
+  padding: 30px 20px;
+}
+
+.sidebar h2 {
+  color: #8ad7ff;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px #0077ff55;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  background: transparent;
+}
+
+.sidebar li:hover {
+  background: rgba(155, 233, 255, 0.12);
+}
+
+.sidebar li.active {
+  background: linear-gradient(90deg, #40c9ff, #e81cff);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 0 8px #40c9ff99;
+}
+
+/* ===========================
+   CONTENT AREA
+=========================== */
+.content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* PANELS */
+.panel {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.panel.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+
+/* ===========================
+   MARKDOWN RENDERED CONTENT
+=========================== */
+.markdown-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 30px;
+  color: #dfe6ff;
+  line-height: 1.8;
+  box-shadow: 0 0 20px rgba(66, 150, 255, 0.1);
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  max-height: 75vh;
+  scrollbar-width: thin;
+  scrollbar-color: #40c9ff44 transparent;
+   scroll-behavior: smooth;
+}
+
+.markdown-box::-webkit-scrollbar {
+  width: 6px;
+}
+.markdown-box::-webkit-scrollbar-thumb {
+  background: #40c9ff66;
+  border-radius: 4px;
+}
+.markdown-box::-webkit-scrollbar-thumb:hover {
+  background: #40c9ffaa;
+}
+
+.markdown-box h1, .markdown-box h2, .markdown-box h3 {
+  color: #8dcaff;
+  text-shadow: 0 0 10px #40c9ff44;
+}
+.markdown-box ul {
+  margin-left: 25px;
+}
+.markdown-box code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  color: #9be9ff;
+}
+
+/* Markdown Table Styling */
+.markdown-box table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.markdown-box th, .markdown-box td {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 12px;
+  text-align: left;
+}
+.markdown-box th {
+  background: rgba(64, 201, 255, 0.15);
+  color: #8ad7ff;
+}
+.markdown-box tr:nth-child(even) {
+  background: rgba(255,255,255,0.03);
+}
+
+/* ===========================
+   CHAT SECTION
+=========================== */
+.chat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  height: 400px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.25);
+}
+
+.message {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: 75%;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.user {
+  background: linear-gradient(135deg, #40c9ff, #0077ff);
+  color: #fff;
+  margin-left: auto;
+  text-align: right;
+  box-shadow: 0 0 10px #40c9ff33;
+}
+.bot {
+  background: rgba(255,255,255,0.1);
+  color: #dfe6f5;
+  margin-right: auto;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Chat input area */
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+.chat-input textarea {
+  flex: 1;
+  resize: none;
+  border-radius: 8px;
+  padding: 12px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: inherit;
+  outline: none;
+}
+.chat-input button {
+  width: 110px;
+  background: linear-gradient(90deg, #40c9ff, #e81cff);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+.chat-input button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #40c9ffaa;
+}
+
+/* ===========================
+   TYPING INDICATOR
+=========================== */
+.message.typing {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #9be9ff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.15s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes blink {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.6; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ===========================
+   HIGHLIGHTED JARGONS
+=========================== */
+.jargon-highlight {
+  background: rgba(64, 201, 255, 0.25);
+  border-bottom: 1px dotted #40c9ff;
+  cursor: help;
+  transition: 0.3s;
+}
+.jargon-highlight:hover {
+  background: rgba(64, 201, 255, 0.5);
+  color: #fff;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+.markdown-box table { width:100%; border-collapse: collapse; margin: 10px 0; }
+.markdown-box th, .markdown-box td { border: 1px solid rgba(255,255,255,0.12); padding: 8px 10px; }
+.markdown-box code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 6px; }
+.markdown-box pre { background: rgba(255,255,255,0.06); padding: 12px; border-radius: 10px; overflow-x: auto; }
+
+
+select {
+  appearance: none;              /* Removes default OS styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: #dfe6f2;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 12px 40px 12px 12px;
+  font-size: 0.9rem;
+  width: 90%;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover + Focus states for glow */
+select:hover, select:focus {
+  border-color: #40c9ff;
+  box-shadow: 0 0 10px #40c9ff55;
+}
+
+/* Dropdown background (for options) */
+select option {
+  background: #0b111f;
+  color: #e0e6f5;
+}
+
+/* Optional custom dropdown arrow */
+select::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  pointer-events: none;
+  color: #40c9ff;
+}
+
+/* Works better inside a relative parent */
+.welcome-container select {
+  position: relative;
+}
