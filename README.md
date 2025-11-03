@@ -1,4 +1,5 @@
 #  Legal Document Demystifier
+[Deployed Pod](https://nyay-sahayak-amf4b3bcfkehbbgq.centralindia-01.azurewebsites.net)
 
 **Make court orders and case files understandable in minutes.**
 Upload a PDF (or image/DOCX), and the app builds a full workspace with:
@@ -23,6 +24,8 @@ Indian court orders are long, jargon-heavy, and hard to scan before a hearing. T
 * map **people / places / entities** as a **graph**,
 * read **similar / landmark cases** quickly,
 * and prepare **arguments & exhibits** for the **very next hearing**.
+
+
 
 ##  Agents (What each one does)
 
@@ -211,8 +214,8 @@ curl http://localhost:8080/healthz
 1. Push your image to a registry (Docker Hub or ACR).
 
    ```bash
-   docker build -t iwantacrepe/legal-demystifier:latest .
-   docker push iwantacrepe/legal-demystifier:latest
+   docker build -t <image_name>:latest .
+   docker push <image_name>:latest
    ```
 2. Create an **Azure Web App** → **Docker** → **Single container** → point to your image.
 3. **App settings** (Configuration → Application settings):
@@ -269,6 +272,3 @@ curl http://localhost:8080/healthz
 * **Neo4j Aura** for graph storage
 * **D3** and **vis-timeline** for rich visualization
 
----
-
-If you want me to drop this into your repo with badges, a small architecture diagram block, or a feature table, say the word and I’ll format it exactly how you like.
