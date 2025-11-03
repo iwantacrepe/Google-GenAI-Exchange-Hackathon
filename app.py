@@ -6,9 +6,10 @@ from agents.summarizer_agent import summarize_file
 # in future you’ll import other agents here
 
 app = Flask(__name__)
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = os.path.join("/tmp", "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 app.secret_key = "secret_key_for_demo"
 
 @app.route("/", methods=["GET", "POST"])
@@ -59,6 +60,24 @@ def summarizer_api():
     language = session.get("language", "English")
     return jsonify({"output": summarize_file(path, language)})
 
+from agents.related_cases_agent import find_related_cases
+
+@app.route("/api/related_cases", methods=["POST"])
+def related_cases_api():
+    try:
+        files = session.get("files", [])
+        language = session.get("language", "English")
+
+        if not files:
+            return jsonify({"output": "⚠️ No file found."})
+
+        result = find_related_cases(files[0], language)
+        return jsonify({"output": result})
+    except Exception as e:
+        print(f"Related Cases API error: {e}")
+        return jsonify({"output": "⚠️ Failed to generate related cases."})
+
+
 
 from agents.jargons_agent import explain_jargons
 
@@ -99,8 +118,11 @@ def timeline_api():
         language = session.get("language", "English")
 
         if not files:
+            print("⚠️ No files found in session.")
             return jsonify({"output": "[]"})
-
+        
+        file_path = files[0]
+        print(f"🕒 Timeline agent started for file: {file_path}")
         output = extract_timeline(files[0], language)
         return jsonify({"output": output})
     except Exception as e:

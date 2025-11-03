@@ -1,5 +1,6 @@
 import json, mimetypes, re
 from services.gemini_client import get_gemini_client
+import os
 
 def extract_timeline(file_path: str, language: str = "English") -> str:
     """
@@ -11,7 +12,25 @@ def extract_timeline(file_path: str, language: str = "English") -> str:
     client = get_gemini_client()
     mime_type, _ = mimetypes.guess_type(file_path)
     mime_type = mime_type or "application/octet-stream"
-    uploaded_file = client.files.upload(file=file_path)
+    safe_path = os.path.join("/tmp", os.path.basename(file_path))
+    if not os.path.exists(safe_path):
+        try:
+            with open(file_path, "rb") as src, open(safe_path, "wb") as dst:
+                dst.write(src.read())
+        except Exception as e:
+            print(f"⚠️ File copy failed: {e}", flush=True)
+            safe_path = file_path
+
+    # Guess mime type
+    mime_type, _ = mimetypes.guess_type(safe_path)
+    mime_type = mime_type or "application/octet-stream"
+
+    # Upload to Gemini
+    try:
+        uploaded_file = client.files.upload(file=safe_path)
+    except Exception as e:
+        print(f"❌ Gemini file upload failed: {e}", flush=True)
+        uploaded_file = None
 
     # 🧩 Enhanced system prompt with reasoning guidance
     system_prompt = (
@@ -38,13 +57,19 @@ def extract_timeline(file_path: str, language: str = "English") -> str:
         "- Always write all text in the chosen language.\n"
     )
 
-    resp = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[system_prompt, uploaded_file],
-    )
+    try:
+        # Stream response for faster first tokens
+        response_stream = client.models.generate_content_stream(
+            model="gemini-2.5-flash",
+            contents=[system_prompt, uploaded_file] if uploaded_file else [system_prompt]
+        )
+        text = "".join(chunk.text for chunk in response_stream if chunk.text)
+    except Exception as e:
+        print(f"❌ Gemini generation failed: {e}", flush=True)
+        text = ""
 
-    text = (resp.text or "").strip()
     text = text.replace("```json", "").replace("```", "").strip()
+    print("🧩 Gemini timeline raw output (first 200 chars):", text[:200], flush=True)
 
     # ✅ Stage 1: Direct JSON parse
     try:
@@ -102,6 +127,6 @@ def extract_timeline(file_path: str, language: str = "English") -> str:
             "title": stage,
             "description": desc
         })
-
+    print(" Gemini timeline raw output:", text[:300])
     # ✅ Always return valid JSON array
     return json.dumps(timeline, indent=2)
