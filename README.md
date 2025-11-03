@@ -180,7 +180,7 @@ gunicorn -c gunicorn.conf.py app:app
 
 Open [http://localhost:8080](http://localhost:8080) (Gunicorn) or the port shown by Flask if using dev server.
 
-## ▶️ Run with Docker (recommended)
+## Run with Docker (recommended)
 
 Build:
 
@@ -271,4 +271,5 @@ curl http://localhost:8080/healthz
 * Google **Gemini** for LLM capabilities
 * **Neo4j Aura** for graph storage
 * **D3** and **vis-timeline** for rich visualization
+
 
