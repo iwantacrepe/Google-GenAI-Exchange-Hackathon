@@ -129,6 +129,43 @@ def timeline_api():
         print(f"Timeline API error: {e}")
         return jsonify({"output": "[]"})
 
+from agents.at_a_glance_agent import generate_glance_summary
+
+@app.route("/api/glance", methods=["POST"])
+def glance_api():
+    try:
+        files = session.get("files", [])
+        language = session.get("language", "English")
+
+        if not files:
+            return jsonify({"output": "⚠️ No file found."})
+
+        result = generate_glance_summary(files[0], language)
+        return jsonify({"output": result})
+    except Exception as e:
+        print(f"At-a-Glance API error: {e}")
+        return jsonify({"output": "⚠️ Failed to generate at-a-glance summary."})
+
+
+
+from agents.readiness_agent import prepare_hearing_readiness
+
+@app.route("/api/readiness", methods=["POST"])
+def readiness_api():
+    try:
+        files = session.get("files", [])
+        language = session.get("language", "English")
+
+        if not files:
+            return jsonify({"output": "⚠️ No file found."})
+
+        result = prepare_hearing_readiness(files[0], language)
+        return jsonify({"output": result})
+    except Exception as e:
+        print(f"Readiness API error: {e}")
+        return jsonify({"output": "⚠️ Failed to generate readiness brief."})
+
+
 from agents.graph_agent import build_graph_from_document
 
 @app.route("/api/graph", methods=["POST"])

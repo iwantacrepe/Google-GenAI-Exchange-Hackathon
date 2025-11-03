@@ -7,67 +7,81 @@
   const userLanguage = "{{ language }}";
   const translations = {
   "English": {
+    "glance": "At-a-Glance",
     "agents": "Agents",
     "summarizer": "Case Summarizer",
     "jargons": "Legal Term Simplifier",
     "timeline": "Case Progress Timeline",
     "graph": "Case Relationship Map",
     "thinker": "Interactive Legal Assistant",
-    "related": "Related / Landmark Cases"
+    "related": "Related / Landmark Cases",
+    "readiness": "Pre-Hearing Readiness"
   },
   "Hindi": {
+    "glance": "एक नज़र में",
     "agents": "एजेंट्स",
     "summarizer": "मामले का सारांश",
     "jargons": "कानूनी शब्दों का सरल रूप",
     "timeline": "मामले की प्रगति समयरेखा",
     "graph": "मामले का संबंध मानचित्र",
     "thinker": "इंटरैक्टिव कानूनी सहायक",
-    "related": "संबंधित / प्रसिद्ध मामले"
+    "related": "संबंधित / प्रसिद्ध मामले",
+    "readiness": "पूर्व-सुनवाई तैयारी"
   },
   "Bengali": {
+    "glance": "এক নজরে",
     "agents": "এজেন্টস",
     "summarizer": "মামলার সারসংক্ষেপ",
     "jargons": "আইনি শব্দের সরল ব্যাখ্যা",
     "timeline": "মামলার অগ্রগতির সময়রেখা",
     "graph": "মামলার সম্পর্ক মানচিত্র",
     "thinker": "ইন্টারঅ্যাকটিভ আইনি সহায়ক",
-    "related": "সম্পর্কিত / ল্যান্ডমার্ক মামলা"
+    "related": "সম্পর্কিত / ল্যান্ডমার্ক মামলা",
+    "readiness": "পূর্ব-শুনানির প্রস্তুতি"
   },
   "Marathi": {
+    "glance": "एक नजर",
     "agents": "एजंट्स",
     "summarizer": "प्रकरणाचा सारांश",
     "jargons": "कायदेशीर शब्दांचे सोपे रूप",
     "timeline": "प्रकरणाच्या प्रगतीची वेळरेषा",
     "graph": "प्रकरण संबंध नकाशा",
     "thinker": "संवादी कायदेशीर सहाय्यक",
-    "related": "संबंधित / लँडमार्क प्रकरणे"
+    "related": "संबंधित / लँडमार्क प्रकरणे",
+    "readiness": "पूर्व-शुनावणी तयारी"
   },
   "Kannada": {
+    "glance": "ಒಂದು ನೋಟದಲ್ಲಿ",
     "agents": "ಏಜೆಂಟ್ಗಳು",
     "summarizer": "ಕೇಸ್ ಸಾರಾಂಶ",
     "jargons": "ಕಾನೂನು ಪದಗಳ ಸರಳ ರೂಪ",
     "timeline": "ಪ್ರಕರಣದ ಪ್ರಗತಿ ಸಮಯಪಟ್ಟಿ",
     "graph": "ಪ್ರಕರಣ ಸಂಬಂಧ ನಕ್ಷೆ",
     "thinker": "ಅಂತರಕ್ರಿಯಾತ್ಮಕ ಕಾನೂನು ಸಹಾಯಕ",
-    "related": "ಸಂಬಂಧಿತ / ಲ್ಯಾಂಡ್‌ಮಾರ್ಕ್ ಪ್ರಕರಣಗಳು"
+    "related": "ಸಂಬಂಧಿತ / ಲ್ಯಾಂಡ್‌ಮಾರ್ಕ್ ಪ್ರಕರಣಗಳು",
+    "readiness": "ಪೂರ್ವ-ಶುಣಾವಣಾ ಸಿದ್ಧತೆ"
   },
   "Telugu": {
+    "glance": "ఒక చూపులో",
     "agents": "ఏజెంట్లు",
     "summarizer": "కేసు సారాంశం",
     "jargons": "న్యాయ పదాల సులభ వివరణ",
     "timeline": "కేసు పురోగతి టైమ్‌లైన్",
     "graph": "కేసు సంబంధ మ్యాప్",
     "thinker": "ఇంటరాక్టివ్ న్యాయ సహాయకుడు",
-    "related": "సంబంధిత / ల్యాండ్‌మార్క్ కేసులు"
+    "related": "సంబంధిత / ల్యాండ్‌మార్క్ కేసులు",
+    "readiness": "పూర్వ-శునాకాల సిద్ధత"
   },
   "Tamil": {
+    "glance": "ஒரு பார்வையில்",
     "agents": "முகவர்கள்",
     "summarizer": "வழக்கின் சுருக்கம்",
     "jargons": "சட்டச் சொற்களின் எளிய விளக்கம்",
     "timeline": "வழக்கின் முன்னேற்ற காலவரிசை",
     "graph": "வழக்கு உறவு வரைபடம்",
     "thinker": "இணையாடும் சட்ட உதவியாளர்",
-    "related": "சம்பந்தப்பட்ட / நிலைமையிலான வழக்குகள்"
+    "related": "சம்பந்தப்பட்ட / நிலைமையிலான வழக்குகள்",
+    "readiness": "முன்-கேள்வி தயாராக 있음"
   }
 };
 
@@ -103,6 +117,7 @@
     document.querySelector("#graph h2").innerText = t.graph;
     document.querySelector("#thinker h2").innerText = t.thinker;
     document.querySelector("#related h2").innerText = t.related;
+    document.querySelector("#readiness h2").innerText = t.readiness;
   });
 
 </script>
@@ -121,12 +136,14 @@
   <div class="sidebar">
     <h2>Agents</h2>
     <ul>
-      <li data-panel="summary" class="active"> Summarizer</li>
+      <li data-panel="glance" class="active"> At-a-Glance</li>
+      <li data-panel="summary"> Summarizer</li>
       <li data-panel="jargons"> Jargons and Terms</li>
       <li data-panel="timeline"> Timeline</li>
       <li data-panel="graph"> Graph</li>
-      <li data-panel="thinker"> Thinker</li>
+      <li data-panel="readiness">Pre-Hearing Readiness</li>
       <li data-panel="related"> Related Cases</li>
+      <li data-panel="thinker"> Thinker</li>
     <li class="change-lang" onclick="window.location.href='/'">
       Change Language
     </li>
@@ -202,7 +219,7 @@
   <div class="content">
 
     <!-- 🧠 SUMMARIZER PANEL -->
-    <div id="summary" class="panel active">
+    <div id="summary" class="panel">
       <h2>Summarizer</h2>
       <div id="summary-content"
            class="markdown-box"
@@ -317,17 +334,6 @@ const items = new vis.DataSet(
   </div>
 
 
-
-    <!-- 💭 THINKER CHAT PANEL -->
-    <div id="thinker" class="panel">
-      <h2>Thinker (Chat Agent)</h2>
-      <div id="chat-box" class="chat-box"></div>
-      <div class="chat-input">
-        <textarea id="user-input" placeholder="Ask anything about your case or position..."></textarea>
-        <button id="sendBtn">Send</button>
-      </div>
-    </div>
-
     <!-- 🔗 RELATED CASES PANEL -->
   <div id="related" class="panel">
     <h2>Related Cases</h2>
@@ -349,6 +355,58 @@ const items = new vis.DataSet(
   });
   </script>
 
+  <!-- 🧾 PRE-HEARING READINESS PANEL -->
+<div id="readiness" class="panel">
+  <h2>🧾 Pre-Hearing Readiness</h2>
+  <div id="readiness-content" class="markdown-box">⚙️ Preparing readiness brief...</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const readinessBox = document.getElementById("readiness-content");
+  if (!readinessBox) return;
+
+  try {
+    const res = await fetch("/api/readiness", { method: "POST" });
+    const data = await res.json();
+    readinessBox.innerHTML = DOMPurify.sanitize(marked.parse(data.output || "⚠️ No readiness insights available."));
+  } catch {
+    readinessBox.innerHTML = "⚠️ Failed to load readiness report.";
+  }
+});
+</script>
+
+<!-- ⚡ AT-A-GLANCE SUMMARY PANEL -->
+<div id="glance" class="panel active">
+  <h2>⚡ At-a-Glance Summary</h2>
+  <div id="glance-content" class="markdown-box">⚙️ Generating overview...</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const glanceBox = document.getElementById("glance-content");
+  if (!glanceBox) return;
+
+  try {
+    const res = await fetch("/api/glance", { method: "POST" });
+    const data = await res.json();
+    glanceBox.innerHTML = DOMPurify.sanitize(marked.parse(data.output || "⚠️ No summary available."));
+  } catch {
+    glanceBox.innerHTML = "⚠️ Failed to load at-a-glance summary.";
+  }
+});
+</script>
+
+
+<!-- 💭 THINKER CHAT PANEL -->
+    <div id="thinker" class="panel">
+      <h2>Thinker (Chat Agent)</h2>
+      <div id="chat-box" class="chat-box"></div>
+      <div class="chat-input">
+        <textarea id="user-input" placeholder="Ask anything about your case or position..."></textarea>
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
 
   </div> <!-- ✅ CLOSES .content -->
 
