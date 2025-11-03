@@ -22,7 +22,7 @@ def explain_jargons(file_path: str, language: str = "English") -> str:
         "For each, give a short, plain-English explanation (2–4 sentences) "
         "and, if relevant, a simple real-world example.\n\n"
         "Return a Markdown table only (no extra text before/after the table):\n\n"
-        "| Term or Phrase | Meaning in Plain English | Example (if any) |\n"
+        "| Term or Phrase | Meaning in Plain language | Example (if any) |\n"
         "|----------------|--------------------------|------------------|\n"
         "| *Habeas Corpus* | A legal writ to bring a detained person before court. | Example: Used when someone is unlawfully imprisoned. |\n\n"
         "Include both single words (e.g., *estoppel*, *jurisprudence*) and short phrases "

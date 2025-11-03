@@ -118,7 +118,11 @@ def graph_api():
     result = build_graph_from_document(files[0], language)
     return jsonify({"output": result})
 
-
+@app.route("/healthz")
+def healthz():
+    """Simple health check for Azure container probes."""
+    return "OK", 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    print(" Flask app starting on port 80...")
+    app.run(host="0.0.0.0", port=80, debug=True)
